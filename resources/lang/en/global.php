@@ -79,6 +79,8 @@ return [
 	
 	'total_payment' => [
 		'title' => 'Total Payment',
+		'individual' => 'Individual',
+		'team' => 'Team',
 	],
 
 	'app_create' => 'Create',
