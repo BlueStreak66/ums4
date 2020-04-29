@@ -74,6 +74,9 @@ return [
 			'date' => 'Date',
 			'state' => 'State',
 			'actions' => 'Actions',
+			'team_name' => 'Team_Name',
+			'team_plan' => 'Team_Plan',
+			'percent' => 'Percent',
 		],
 	],
 	

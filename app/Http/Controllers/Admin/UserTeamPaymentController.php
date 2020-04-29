@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\PaymentHistory;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\DB;
 
 class UserTeamPaymentController extends Controller
 {

@@ -9,7 +9,7 @@
             Total Amount - {{$real_amount}} USD
         </div>
 
-        <div class="panel-body table-responsive col-sm-4" >
+        <div class="panel-body table-responsive" >
             <table class="table table-bordered table-striped {{ count($sum_history) > 0 ? 'datatable' : '' }}" >
                 <thead>
                     <tr>
