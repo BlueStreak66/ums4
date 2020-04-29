@@ -49,3 +49,6 @@ a.dt-button.buttons-excel.buttons-html5 {
     line-height: 1.5;
     background-image: none;
 }
+body {
+    background-color: #222d32 !important;
+ }
