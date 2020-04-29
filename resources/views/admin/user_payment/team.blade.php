@@ -25,23 +25,23 @@
                             <tr data-entry-id="{{ $team->id }}">
                                         @php $team_rate = $team->all_amount * 100 / $team->team_plan; @endphp
                                         @if ( $team_rate > 90 )
-                                            <td style="color:blue"><b>{{ $key + 1 }}</b></td>   
-                                            <td style="color:blue"><b>{{ $team->team_name }}</b></td>
-                                            <td style="color:blue"><b>{{ $team->all_amount }}</b></td>
-                                            <td style="color:blue"><b>{{ $team->team_plan }}</b></td>
-                                            <td style="color:blue"><b>{{ round($team->team_rate) }}{{ " " }}%</b></td>
+                                            <td style="color:blue">{{ $key + 1 }}</td>   
+                                            <td style="color:blue">{{ $team->team_name }}</td>
+                                            <td style="color:blue">{{ $team->all_amount }}</td>
+                                            <td style="color:blue">{{ $team->team_plan }}</td>
+                                            <td style="color:blue">{{ round($team->team_rate) }}{{ " " }}%</td>
                                         @elseif ( $team_rate < 30)
-                                            <td style="color:red"><b>{{ $key + 1 }}</b></td>   
-                                            <td style="color:red"><b>{{ $team->team_name }}</b></td>
-                                            <td style="color:red"><b>{{ $team->all_amount }}</b></td>
-                                            <td style="color:red"><b>{{ $team->team_plan }}</b></td>
-                                            <td style="color:red"><b>{{ round($team->team_rate) }}{{ " " }}%</b></td>
+                                            <td style="color:red">{{ $key + 1 }}</td>   
+                                            <td style="color:red">{{ $team->team_name }}</td>
+                                            <td style="color:red">{{ $team->all_amount }}</td>
+                                            <td style="color:red">{{ $team->team_plan }}</td>
+                                            <td style="color:red">{{ round($team->team_rate) }}{{ " " }}%</td>
                                         @else
-                                            <td><b>{{ $key + 1 }}</b></td>   
-                                            <td><b>{{ $team->team_name }}</b></td>
-                                            <td><b>{{ $team->all_amount }}</b></td>
-                                            <td><b>{{ $team->team_plan }}</b></td>
-                                            <td><b>{{ round($team->team_rate) }}{{ " " }}%</b></td>
+                                            <td>{{ $key + 1 }}</td>   
+                                            <td>{{ $team->team_name }}</td>
+                                            <td>{{ $team->all_amount }}</td>
+                                            <td>{{ $team->team_plan }}</td>
+                                            <td>{{ round($team->team_rate) }}{{ " " }}%</td>
                                         @endif
                             </tr>
                         @endforeach
