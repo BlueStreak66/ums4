@@ -39,5 +39,6 @@ Route::group(['middleware' => ['admin'], 'prefix' => '', 'as' => 'admin.'], func
     Route::resource('payment_history', 'Admin\PaymentHistoryController');
     Route::get('payment_history_confirm', ['uses' => 'Admin\PaymentHistoryController@confirm', 'as' => 'payment_history.confirm']);
     Route::post('payment_history_confirm', ['uses' => 'Admin\PaymentHistoryController@confirmPost', 'as' => 'payment_history.confirm']);
-	Route::resource('user_payment', 'Admin\UserPaymentController');
+    Route::get( 'userpayment/team', ['uses' => 'Admin\UserTeamPaymentController@team', 'as' => 'payment_history.team']);
+    Route::resource('user_payment', 'Admin\UserPaymentController');
 });
