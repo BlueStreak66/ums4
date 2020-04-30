@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 class Team extends Model
 {
     protected $table = 'teams';
-    protected $fillable = ['team_name', 'team_leader'];
+    protected $fillable = ['team_name', 'team_leader', 'team_plan'];
 
     public function members()
     {

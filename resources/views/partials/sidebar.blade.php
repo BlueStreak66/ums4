@@ -108,7 +108,7 @@
                 </span>
             </a>
             <ul class="treeview-menu">
-            @can('team_access')
+            @can('payment_access')
                 <li class="">
                     <a href="{{ route('admin.user_payment.index') }}">
                         <i class="fa fa-briefcase"></i>
@@ -118,7 +118,7 @@
                     </a>
                 </li>
             @endcan
-            @can('team_access')
+            @can('payment_access')
             <li class="">
                 <a href="{{ route('admin.payment_history.team') }}">
                     <i class="fa fa-user"></i>

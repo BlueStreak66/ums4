@@ -51,6 +51,7 @@ return [
 		'fields' => [
 			'team_name' => 'Team Name',
 			'team_leader' => 'Team Leader',
+			'team_plan' => 'Team Plan',
 			'created_at' => 'Created Time',
 		],
 	],

@@ -22,6 +22,7 @@
                         <th>@lang('global.app_number')</th>
                         <th>@lang('global.teams.fields.team_name')</th>
                         <th>@lang('global.teams.fields.team_leader')</th>
+                        <th>@lang('global.teams.fields.team_plan')</th>
                         <th>@lang('global.teams.fields.created_at')</th>
                         <th>&nbsp;</th>
                     </tr>
@@ -34,6 +35,7 @@
                                 <td>{{ count($teams) - $key }}</td>
                                 <td>{{ $team->team_name }}</td>
                                 <td>{{ $team->leader['name'] }}</td>
+                                <td>{{ $team->team_plan }}</td>
                                 <td>{{ $team->created_at }}</td>
                                 <td>
                                     @can('team_edit')

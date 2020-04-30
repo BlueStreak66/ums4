@@ -17,6 +17,9 @@
                     <p class="help-block"></p>
                     {!! Form::label('team_leader', 'Team Leader*', ['class' => 'control-label']) !!}
                     {!! Form::select('team_leader', $users, old('team_leader'), ['class' => 'form-control']) !!}
+                    <p class="help-block"></p>
+                    {!! Form::label('team_plan', 'Team Plan*', ['class' => 'control-label']) !!}
+                    {!! Form::number('team_plan', old('team_plan'), ['class' => 'form-control']) !!}
                 </div>
             </div>
         </div>
