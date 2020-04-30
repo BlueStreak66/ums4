@@ -76,6 +76,7 @@
         },
         axisY: {
             tickColor: "#000",
+            valueFormatString:"#,##0.# USD",
         },
         toolTip: {
             shared: true,
