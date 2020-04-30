@@ -19,7 +19,7 @@
                     {!! Form::select('user_id', $users, old('user_id'), ['class' => 'form-control']) !!}
                     <p class="help-block"></p>
                     {!! Form::label('payment_address', 'Payment Address*', ['class' => 'control-label']) !!}
-                    {!! Form::text('payment_address', old('payment_address'), ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
+                    {!! Form::select('payment_address', $accounts, old('email'), ['class' => 'form-control']) !!}
                     <p class="help-block"></p>
                     {!! Form::label('comment', 'Comment*', ['class' => 'control-label']) !!}
                     {!! Form::text('comment', old('comment'), ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\PaymentHistory;
 use App\User;
+use App\PaymentAddress;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
@@ -35,14 +36,16 @@ class PaymentHistoryController extends Controller
         if (! Gate::allows('payment_create')) {
             return abort(401);
         }
-		if(Gate::check('admin'))
-			$users = User::where('is_active', 1)->pluck('name', 'id');
-		else
-			$users = User::where(['is_active' => 1, 'id' => auth()->user()->id])->pluck('name', 'id');
-			
-        
-		
-        return view('admin.payment_history.create', compact('users'));
+		if(Gate::check('admin')){
+            $users = User::where('is_active', 1)->pluck('name', 'id');
+            $accounts = PaymentAddress::all()->pluck('email', 'id');
+        }
+		else{
+            $users = User::where(['is_active' => 1, 'id' => auth()->user()->id])->pluck('name', 'id');
+            $accounts = PaymentAddress::where(['id' => auth()->account()->id])->pluck('email', 'id');
+        }
+
+        return view('admin.payment_history.create', compact('users', 'accounts'));
     }
 
     /**

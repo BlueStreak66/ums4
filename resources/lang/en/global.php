@@ -9,6 +9,15 @@ return [
 		],
 	],
 	
+	'accounts' => [
+		'title' => 'Bank Accounts',
+		'created_at' => 'Time',
+		'fields' => [
+			'account' => 'Account',
+			'email' => 'Payment Address',
+		],
+	],
+	
 	'permissions' => [
 		'title' => 'Permissions',
 		'created_at' => 'Time',
