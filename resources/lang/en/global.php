@@ -2,6 +2,12 @@
 
 return [
 	
+	'dashboard' => [
+		'title' => 'Dashboard',
+		'payment_addr' => 'Payment Address',
+		'post' => 'Posts',
+	],
+
 	'user-management' => [
 		'title' => 'User Management',
 		'created_at' => 'Time',

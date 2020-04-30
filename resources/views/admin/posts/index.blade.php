@@ -49,17 +49,17 @@
 										<h3>Welcome to Posts</h3>
 									</div>	
 								</div>
+								<div class="row-md-2">
+									<div class="col-md-10">
+										@can('payment_create')
+										<p>
+											<a href="{{ route('admin.dashboard.create') }}" class="btn btn-success">@lang('global.app_add_new')</a>
+										</p>
+										@endcan
+									</div>
+								</div>
 						</div>
 					</div>
-				</div>
-			</div>
-			<div class="row-md-2">
-				<div class="col">
-					@can('payment_create')
-					<p>
-							<a href="{{ route('admin.posts.create') }}" class="btn btn-success">Add post</a>
-					</p>
-					@endcan
 				</div>
 			</div>
 		</div>
