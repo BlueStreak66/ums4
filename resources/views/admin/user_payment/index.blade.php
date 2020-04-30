@@ -51,8 +51,62 @@
                 </tbody>
             </table>
         </div>
+        <div class="chart-responsive col-sm-12" id="individual_chart">
+        </div>
     </div>
 @stop
 
 @section('javascript') 
+<script>
+    var chart_datas = [@foreach($sum_history as $key => $user)
+                            {'label' : '{{ $user->name }}',
+                             'y' : '{{ $user->amount }}'},
+                        @endforeach ];
+    for (var i=0; i<chart_datas.length;i++){
+        chart_datas[i]['y'] = Number(chart_datas[i]['y']);
+    }
+
+    var individual_chart = new CanvasJS.Chart("individual_chart", {
+        exportEnabled: true,
+        animationEnabled: true,
+        axisX:{
+            tickLength: 0,
+            tickLength: 10,
+            tickColor: "write",
+        },
+        axisY: {
+            tickColor: "#000",
+            valueFormatString:"#,##0.# USD",
+        },
+        toolTip: {
+            shared: true,
+        },
+        legend: {
+            cursor: "pointer",
+            itemclick: toggleDataSeries,
+            labels: {
+                fontSize: 12,
+            },
+        },
+        data: [{
+            type: "column",
+            name: "amount",
+            showInLegend: false,      
+            yValueFormatString: "#,##0.# USD",
+            dataPoints: chart_datas,
+        }],
+    });
+    individual_chart.render();
+
+    function toggleDataSeries(e) {
+        if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+            e.dataSeries.visible = false;
+        } else {
+            e.dataSeries.visible = true;
+        }
+        e.individual_chart.render();
+    }
+    $('.canvasjs-chart-credit').addClass('hide');
+    $('.canvasjs-chart-toolbar').addClass('hide');
+</script>
 @endsection

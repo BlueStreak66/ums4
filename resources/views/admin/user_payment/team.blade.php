@@ -53,25 +53,69 @@
                 </tbody>
             </table>
         </div>
-        <!-- <div class="chart-responsive col-sm-offset-3 col-sm-2">
-            <canvas id="chart"></canvas>
-        </div> -->
+        <div class="chart-responsive col-sm-12" id="team_chart">
+        </div>
     </div>
 @stop
-<script>    
-    var team_history = <?php echo json_encode($sum_history) ?>;
-</script>
 @section('javascript') 
 <script>
-    $('#team_table').dataTable({
-        scrollCollapse : true,
-        scrollY: 480,
-        dom : 'lrtip',
-        aLengthMenu: [
-            [10, 25, 50, 100, 200, -1],
-            [10, 25, 50, 100, 200, "All"]
+    var team_amount_datas = [@foreach($sum_history as $key => $team)
+                            {'label' : '{{ $team->team_name }}',
+                             'y' : '{{ $team->all_amount }}'},
+                        @endforeach ];
+    var team_rate_datas = [@foreach($sum_history as $key => $team)
+                            {'label' : '{{ $team->team_name }}',
+                             'y' : '{{ $team->team_rate }}'},
+                        @endforeach ];
+    for (var i=0; i<team_amount_datas.length;i++){
+        team_amount_datas[i]['y'] = Number(team_amount_datas[i]['y']);
+        team_rate_datas[i]['y'] = Math.round(Number(team_rate_datas[i]['y']) * 10) / 10;
+    }
+
+    var team_chart = new CanvasJS.Chart("team_chart", {
+        exportEnabled: true,
+        animationEnabled: true,
+        axisX:{
+            tickLength: 0,
+            tickLength: 10,
+            tickColor: "write",
+        },
+        axisY: {
+            tickColor: "#000",
+            valueFormatString:"#,##0.# '%'",
+        },
+        toolTip: {
+            shared: true,
+        },
+        legend: {
+            cursor: "pointer",
+            itemclick: toggleDataSeries,
+            labels: {
+                fontSize: 12,
+            },
+        },
+        data: [
+            {
+                type: "column",
+                name: "pecent",
+                showInLegend: false,
+                yValueFormatString: "#,##0.# '%'",
+                dataPoints: team_rate_datas,
+            },
         ],
-        iDisplayLength: 10
     });
+
+    team_chart.render();
+
+    function toggleDataSeries(e) {
+        if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+            e.dataSeries.visible = false;
+        } else {
+            e.dataSeries.visible = true;
+        }
+        e.team_chart.render();
+    }
+    $('.canvasjs-chart-credit').addClass('hide');
+    $('.canvasjs-chart-toolbar').addClass('hide');
 </script>
 @endsection
