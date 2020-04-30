@@ -52,3 +52,9 @@ a.dt-button.buttons-excel.buttons-html5 {
 body {
     background-color: #222d32 !important;
  }
+.chart-responsive {
+    margin-top: 20px;
+    border: 1px solid black;
+    height: 500px;
+    padding: 0px;
+}
