@@ -52,7 +52,7 @@
 									<div class="row">
 										<div class="row-md-12">
 										<div class="col-md-11">
-											{{ $post->post_content }}
+											{!! nl2br(e($post->post_content)) !!}
 										</div>
 										<div class="col-md-1">
 										@can('post_edit')
