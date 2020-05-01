@@ -58,15 +58,25 @@
 
 @section('javascript') 
 <script>
-    var chart_datas = [@foreach($sum_history as $key => $user)
+    var individual_plan_amount = 3000;
+    var individual_plan_min_amount = 500;
+    var individual_chart_color = [];
+    var individual_chart_datas = [@foreach($sum_history as $key => $user)
                             {'label' : '{{ $user->name }}',
                              'y' : '{{ $user->amount }}'},
-                        @endforeach ];
-    for (var i=0; i<chart_datas.length;i++){
-        chart_datas[i]['y'] = Number(chart_datas[i]['y']);
+                        @endforeach ];    
+    
+    for (var i=0; i<individual_chart_datas.length;i++){
+        individual_chart_datas[i]['y'] = Number(individual_chart_datas[i]['y']);
+        if(individual_chart_datas[i]['y'] >= individual_plan_amount) individual_chart_color[i] = "#0000FF";
+        else if(individual_chart_datas[i]['y'] < individual_plan_amount && individual_chart_datas[i]['y'] > individual_plan_min_amount) individual_chart_color[i] = "#000000";
+        else individual_chart_color[i] = "#FF0000";
     }
 
+    CanvasJS.addColorSet("individual_chart_color", individual_chart_color);
+
     var individual_chart = new CanvasJS.Chart("individual_chart", {
+        colorSet: "individual_chart_color",
         exportEnabled: true,
         animationEnabled: true,
         axisX:{
@@ -93,7 +103,7 @@
             name: "amount",
             showInLegend: false,      
             yValueFormatString: "#,##0.# USD",
-            dataPoints: chart_datas,
+            dataPoints: individual_chart_datas,
         }],
     });
     individual_chart.render();

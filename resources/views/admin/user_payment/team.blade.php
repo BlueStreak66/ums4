@@ -59,6 +59,9 @@
 @stop
 @section('javascript') 
 <script>
+    var team_plan_rate = 100;
+    var team_plan_min_rate = 50;
+    var team_chart_color = [];
     var team_amount_datas = [@foreach($sum_history as $key => $team)
                             {'label' : '{{ $team->team_name }}',
                              'y' : '{{ $team->all_amount }}'},
@@ -70,9 +73,15 @@
     for (var i=0; i<team_amount_datas.length;i++){
         team_amount_datas[i]['y'] = Number(team_amount_datas[i]['y']);
         team_rate_datas[i]['y'] = Math.round(Number(team_rate_datas[i]['y']) * 10) / 10;
+        if(team_rate_datas[i]['y'] >= team_plan_rate) team_chart_color[i] = "#0000FF";
+        else if(team_rate_datas[i]['y'] < team_plan_rate && team_rate_datas[i]['y'] > team_plan_min_rate) team_chart_color[i] = "#000000";
+        else team_chart_color[i] = "#FF0000";
     }
 
+    CanvasJS.addColorSet("team_chart_color", team_chart_color);
+
     var team_chart = new CanvasJS.Chart("team_chart", {
+        colorSet: "team_chart_color",
         exportEnabled: true,
         animationEnabled: true,
         axisX:{
