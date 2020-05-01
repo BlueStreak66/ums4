@@ -2,17 +2,16 @@
 
 @section('content')
     <h3 class="page-title">@lang('global.dashboard.post')</h3>
-    {!! Form::open(['method' => 'POST', 'route' => ['admin.posts.store']]) !!}
+    {!! Form::model($post, ['method' => 'PUT', 'route' => ['admin.posts.update', $post->id]]) !!}
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            @lang('global.app_create')
+            @lang('global.app_edit')
         </div>
-        
         <div class="panel-body">
             <div class="row">
                 <div class="col-xs-12 form-group">
-                    {!! Form::label('post_title', 'Post Title*', ['class' => 'control-label']) !!}
+                {!! Form::label('post_title', 'Post Title*', ['class' => 'control-label']) !!}
                     {!! Form::text('post_title', old('post_title'), ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
                     <p class="help-block"></p>
                     {!! Form::label('post_content', 'Post Content', ['class' => 'control-label']) !!}
@@ -22,6 +21,6 @@
         </div>
     </div>
 
-    {!! Form::submit(trans('global.app_save'), ['class' => 'btn btn-danger']) !!}
+    {!! Form::submit(trans('global.app_update'), ['class' => 'btn btn-danger']) !!}
     {!! Form::close() !!}
 @stop

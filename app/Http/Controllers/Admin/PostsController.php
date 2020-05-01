@@ -6,6 +6,7 @@ use App\Post;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Gate;
 
 class PostsController extends Controller
 {
@@ -27,10 +28,6 @@ class PostsController extends Controller
      */
     public function index()
     {
-        // if (! Gate::allows('dashboard_access')) {
-        //     return abort(401);
-        // }
-
         return view('home');
     }
 
@@ -41,6 +38,9 @@ class PostsController extends Controller
      */
     public function create()
     {
+        if (! Gate::allows('post_create')) {
+            return abort(401);
+        }
         return view('admin.posts.create');
     }
 
@@ -52,17 +52,11 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        // if (! Gate::allows('payment_create')) {
-        //     return abort(401);
-        // }
+        if (! Gate::allows('post_create')) {
+            return abort(401);
+        }
         $data = $request->all();
-         
-        // var_dump($data);
-        // exit(0);
-
-        //$data['user_name'] = User::where('id', $data['user_id'])->first()->name;
-        //$data['created_by'] = auth()->user()->id;
-        $payment_history = Post::create($data);
+        $posts = Post::create($data);
 
         return redirect('/');
     }
@@ -86,7 +80,13 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        //
+        if (! Gate::allows('post_edit')) {
+            return abort(401);
+        }
+
+        $post = Post::findOrFail($id);
+
+        return view('admin.posts.edit', compact('post'));
     }
 
     /**
@@ -98,7 +98,14 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if (! Gate::allows('post_edit')) {
+            return abort(401);
+        }
+
+        $post = Post::findOrFail($id);
+        $post->update($request->all());
+    
+        return redirect('/');
     }
 
     /**
@@ -109,6 +116,13 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if (! Gate::allows('post_delete')) {
+            return abort(401);
+        }
+
+        $post = Post::findOrFail($id);
+        $post->delete();
+
+        return redirect('/');
     }
 }

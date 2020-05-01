@@ -40,6 +40,9 @@ class PermissionSeed extends Seeder
             ['id' => 25, 'title' => 'team_delete',],
             ['id' => 26, 'title' => 'team_management_access',],
             ['id' => 27, 'title' => 'user_hide',],
+            ['id' => 28, 'title' => 'post_create',],
+            ['id' => 29, 'title' => 'post_edit',],
+            ['id' => 30, 'title' => 'post_delete',],
         ];
 
         foreach ($items as $item) {
