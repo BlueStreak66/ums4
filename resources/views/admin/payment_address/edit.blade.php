@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <h3 class="page-title">@lang('global.app_dashboard')</h3>
-    {!! Form::model($addr, ['method' => 'PUT', 'route' => ['admin.home.update', $addr->id]]) !!}
+    <h3 class="page-title">@lang('global.accounts.title')</h3>
+    {!! Form::model($account, ['method' => 'PUT', 'route' => ['admin.payment_address.update', $account->id]]) !!}
 
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -24,7 +24,7 @@
             <div class="row"> 
                 <div class="col-xs-12 form-group">
                     {!! Form::label('email', 'Payment Address*', ['class' => 'control-label']) !!}
-                    {!! Form::text('email', old('address'), ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
+                    {!! Form::text('email', old('email'), ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
                     <p class="help-block"></p>
                     @if($errors->has('title'))
                         <p class="help-block">

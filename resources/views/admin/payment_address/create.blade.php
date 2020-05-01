@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <h3 class="page-title">@lang('global.app_dashboard')</h3>
-    {!! Form::open(['method' => 'POST', 'route' => ['admin.home.store']]) !!}
+    <h3 class="page-title">@lang('global.accounts.title')</h3>
+    {!! Form::open(['method' => 'POST', 'route' => ['admin.payment_address.store']]) !!}
 
     <div class="panel panel-default">
         <div class="panel-heading">

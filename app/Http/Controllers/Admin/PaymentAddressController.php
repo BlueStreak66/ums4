@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\PaymentAddress;
-use App\User;
-use App\TeamMembers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\PaymentAddress;
 use Illuminate\Support\Facades\Gate;
 
 class PaymentAddressController extends Controller
@@ -15,7 +13,11 @@ class PaymentAddressController extends Controller
     {
         $this->middleware('auth');
     }
-
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
         if (! Gate::allows('payment_address_access')) {
@@ -57,6 +59,17 @@ class PaymentAddressController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -84,7 +97,6 @@ class PaymentAddressController extends Controller
         if (! Gate::allows('payment_address_edit')) {
             return abort(401);
         }
-
         $account = PaymentAddress::findOrFail($id);
         $account->update($request->all());
 

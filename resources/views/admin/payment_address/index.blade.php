@@ -2,10 +2,10 @@
 @extends('layouts.app')
 
 @section('content')
-    <h3 class="page-title">@lang('global.app_dashboard')</h3>
+    <h3 class="page-title">@lang('global.accounts.title')</h3>
     @can('payment_address_create')
     <p>
-        <a href="{{ route('admin.home.create') }}" class="btn btn-success">@lang('global.app_add_new')</a>
+        <a href="{{ route('admin.payment_address.create') }}" class="btn btn-success">@lang('global.app_add_new')</a>
     </p>
     @endcan
 
@@ -34,14 +34,14 @@
                                 <td>{{ $account->email }}</td>
                                 <td>
                                     @can('payment_address_edit')
-                                    <a href="{{ route('admin.home.edit',[$account->id]) }}" class="btn btn-xs btn-info">@lang('global.app_edit')</a>
+                                    <a href="{{ route('admin.payment_address.edit',[$account->id]) }}" class="btn btn-xs btn-info">@lang('global.app_edit')</a>
                                     @endcan
                                     @can('payment_address_delete')
                                     {!! Form::open(array(
                                         'style' => 'display: inline-block;',
                                         'method' => 'DELETE',
                                         'onsubmit' => "return confirm('".trans("global.app_are_you_sure")."');",
-                                        'route' => ['admin.home.destroy', $account->id])) !!}
+                                        'route' => ['admin.payment_address.destroy', $account->id])) !!}
                                     {!! Form::submit(trans('global.app_delete'), array('class' => 'btn btn-xs btn-danger')) !!}
                                     {!! Form::close() !!}
                                     @endcan
