@@ -19,7 +19,18 @@
                     {!! Form::select('user_id', $users, old('user_id'), ['class' => 'form-control']) !!}
                     <p class="help-block"></p>
                     {!! Form::label('payment_address', 'Payment Address*', ['class' => 'control-label']) !!}
-                    {!! Form::select('payment_address', $accounts, old('email'), ['class' => 'form-control']) !!}
+                    <div>
+                        <div class="col-sm-11">
+                            <a>{!! Form::select('payment_address', $accounts, old('email'), ['class' => 'form-control']) !!}</a>
+                        </div>
+                        <div class="col-sm-1">
+                        @can('payment_address_create')
+                        <p>
+                            <a href="{{ route('admin.payment_address.index') }}" class="btn btn-success">@lang('global.app_add_new')</a>
+                        </p>
+                        @endcan
+                        </div>
+                    </div>
                     <p class="help-block"></p>
                     {!! Form::label('comment', 'Comment*', ['class' => 'control-label']) !!}
                     {!! Form::text('comment', old('comment'), ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
