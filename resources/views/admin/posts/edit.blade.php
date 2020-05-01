@@ -14,7 +14,7 @@
                 {!! Form::label('post_title', 'Post Title*', ['class' => 'control-label']) !!}
                     {!! Form::text('post_title', old('post_title'), ['class' => 'form-control', 'placeholder' => '', 'required' => '']) !!}
                     <p class="help-block"></p>
-                    {!! Form::label('post_content', 'Post Content', ['class' => 'control-label']) !!}
+                    {!! Form::label('post_content', 'Post Content*', ['class' => 'control-label']) !!}
                     {!! Form::textarea('post_content', old('post_content'), ['class' => 'form-control']) !!}
                 </div>
             </div>

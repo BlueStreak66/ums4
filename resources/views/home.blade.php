@@ -38,7 +38,7 @@
 				<div class="col">
 					@can('post_create')
 					<p>
-						<a href="{{ route('admin.posts.create') }}" class="btn btn-success">Add post</a>
+						<a href="{{ route('admin.posts.create') }}" class="btn btn-success">Add new</a>
 					</p>
 					@endcan
 				</div>
