@@ -8,6 +8,7 @@ use App\PaymentAddress;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\DB;
 
 class PaymentHistoryController extends Controller
 {
@@ -38,11 +39,11 @@ class PaymentHistoryController extends Controller
         }
 		if(Gate::check('admin')){
             $users = User::where('is_active', 1)->pluck('name', 'id');
-            $accounts = PaymentAddress::all()->pluck('email', 'id');
+            $accounts = PaymentAddress::select("*", DB::raw("CONCAT(accounts.account,' - ',accounts.email) as full_address"))->pluck('full_address', 'id');
         }
 		else{
             $users = User::where(['is_active' => 1, 'id' => auth()->user()->id])->pluck('name', 'id');
-            $accounts = PaymentAddress::where(['id' => auth()->account()->id])->pluck('email', 'id');
+            $accounts = PaymentAddress::select("*", DB::raw("CONCAT(accounts.account,' - ',accounts.email) as full_address"))->pluck('full_address', 'id');
         }
 
         return view('admin.payment_history.create', compact('users', 'accounts'));
@@ -61,8 +62,11 @@ class PaymentHistoryController extends Controller
         }
         $data = $request->all();
         $data['user_name'] = User::where('id', $data['user_id'])->first()->name;
+        $account_id = $data['payment_address'];
+        $data['payment_address'] = PaymentAddress::select("*", DB::raw("CONCAT(accounts.account,' - ',accounts.email) as full_address"))->where('id', $account_id)->first()->full_address;
         $data['created_by'] = auth()->user()->id;
         $payment_history = PaymentHistory::create($data);
+        
         return redirect()->route('admin.payment_history.index');
     }
 
