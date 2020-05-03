@@ -23,6 +23,7 @@ class UserPaymentController extends Controller
         }
 		$sum_history = DB::select(DB::raw("SELECT users.id, users.name,  COALESCE(SUM(payment_history.real_amount),0) as amount FROM users LEFT JOIN  payment_history ON users.id = payment_history.user_id where users.email<>'admin@admin.com' and users.is_active=1 GROUP BY users.id ORDER BY amount desc"));		
         $real_amount = PaymentHistory::all()->sum('real_amount');
-        return view('admin.user_payment.index', compact('real_amount', 'sum_history'));
+        $payment_histories = PaymentHistory::all()->SortByDesc('create_date');
+        return view('admin.user_payment.index', compact('real_amount', 'sum_history', 'payment_histories'));
     }
 }

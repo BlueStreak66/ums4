@@ -22,7 +22,7 @@
                 <tbody>
                     @if (count($sum_history) > 0)
                         @foreach ($sum_history as $key => $user)
-                            <tr data-entry-id="{{ $user->id }}">
+                            <tr data-entry-id="{{ $user->id }}"  data-toggle="modal" data-target="#{{ $user->id }}">
                                 
 								@if ($user->amount >= 3000)
 									<td style="color:blue"><b>{{ $key + 1 }}</b></td>   
@@ -42,6 +42,29 @@
 									<td>{{ $user->amount }}</td>
 								@endif
                             </tr>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="{{ $user->id }}" role="dialog">
+                                <div class="modal-dialog">
+                                
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title"><b>{{ $user->name }}</b></h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        @foreach ($payment_histories as $key1 => $history)
+                                            @if( $user->name == $history->user_name)
+                                                    <div class="col-sm-4">{{ $history->create_date }}</div>
+                                                    <div class="col-sm-4">{{ $history->real_amount }}</div>
+                                                    <div class="col-sm-4">{{ $history->comment }}</div>
+                                            @endif
+                                        @endforeach
+                                        <div><center><b> Total: </b> {{ $user->amount }}</center></div>
+                                    </div>
+                                </div>
+                            </div>
                         @endforeach
                     @else
                         <tr>
