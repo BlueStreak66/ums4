@@ -60,6 +60,7 @@
 <script>
     var individual_plan_amount = 3000;
     var individual_plan_min_amount = 500;
+    var set_max = 2500;
     var individual_chart_color = [];
     var individual_chart_datas = [@foreach($sum_history as $key => $user)
                             {'label' : '{{ $user->name }}',
@@ -68,6 +69,8 @@
     
     for (var i=0; i<individual_chart_datas.length;i++){
         individual_chart_datas[i]['y'] = Number(individual_chart_datas[i]['y']);
+        if(individual_chart_datas[i]['y'] > individual_plan_amount) set_max = individual_chart_datas[i]['y'];
+
         if(individual_chart_datas[i]['y'] >= individual_plan_amount) individual_chart_color[i] = "#0000FF";
         else if(individual_chart_datas[i]['y'] < individual_plan_amount && individual_chart_datas[i]['y'] > individual_plan_min_amount) individual_chart_color[i] = "#000000";
         else individual_chart_color[i] = "#FF0000";
@@ -87,6 +90,7 @@
         axisY: {
             tickColor: "#000",
             valueFormatString:"#,##0.# USD",
+            maximum: set_max + 500,
         },
         toolTip: {
             shared: true,

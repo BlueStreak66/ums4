@@ -61,6 +61,7 @@
 <script>
     var team_plan_rate = 100;
     var team_plan_min_rate = 50;
+    var set_max = 90;
     var team_chart_color = [];
     var team_amount_datas = [@foreach($sum_history as $key => $team)
                             {'label' : '{{ $team->team_name }}',
@@ -73,6 +74,8 @@
     for (var i=0; i<team_amount_datas.length;i++){
         team_amount_datas[i]['y'] = Number(team_amount_datas[i]['y']);
         team_rate_datas[i]['y'] = Math.round(Number(team_rate_datas[i]['y']) * 10) / 10;
+        if(team_rate_datas[i]['y'] > team_plan_rate) set_max = individual_chart_datas[i]['y'];
+
         if(team_rate_datas[i]['y'] >= team_plan_rate) team_chart_color[i] = "#0000FF";
         else if(team_rate_datas[i]['y'] < team_plan_rate && team_rate_datas[i]['y'] > team_plan_min_rate) team_chart_color[i] = "#000000";
         else team_chart_color[i] = "#FF0000";
@@ -92,6 +95,7 @@
         axisY: {
             tickColor: "#000",
             valueFormatString:"#,##0.# '%'",
+            maximum: set_max + 10,
         },
         toolTip: {
             shared: true,
