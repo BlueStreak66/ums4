@@ -23,7 +23,12 @@
                     @if (count($sum_history) > 0)
                         @foreach ($sum_history as $key => $team)
                             <tr data-entry-id="{{ $team->id }}">
+                                        @php $team_rate = 0; @endphp
+                                        @if ($team->team_plan != 0)
                                         @php $team_rate = $team->all_amount * 100 / $team->team_plan; @endphp
+                                        @else
+                                            @php $team_rate = 0; @endphp
+                                        @endif
                                         @if ( $team_rate > 90 )
                                             <td style="color:blue">{{ $key + 1 }}</td>   
                                             <td style="color:blue">{{ $team->team_name }}</td>

@@ -23,7 +23,7 @@
                 <tbody>
                     @if (count($sum_history) > 0)
                         @foreach ($sum_history as $key => $user)
-                            <tr data-entry-id="{{ $user->id }}"  data-toggle="modal" data-target="#{{ $user->id }}">
+                            <tr data-entry-id="{{ $user->id }}"  data-toggle="modal" data-target="#sample" id="{{ $user->id }}" onclick="click_tr(this.id)">
                                 
 								@if ($user->amount >= 3000)
 									<td style="color:blue"><b>{{ $key + 1 }}</b></td>   
@@ -45,30 +45,7 @@
                             </tr>
 
                             <!-- Modal -->
-                            <div class="modal fade" id="{{ $user->id }}" role="dialog">
-                                <div class="modal-dialog">
-                                
-                                <!-- Modal content-->
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title"><b>{{ $user->name }}</b></h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="col-sm-4" style="border:1px solid #000"><b>Date</b></div>
-                                        <div class="col-sm-4" style="border:1px solid #000"><b>Real_amount(USD)</b></div>
-                                        <div class="col-sm-4" style="border:1px solid #000"><b>Comment</b></div>
-                                        @foreach ($payment_histories as $key1 => $history)
-                                            @if( $user->name == $history->user_name && $history->state == 1)
-                                                    <div class="col-sm-4" style="border:1px solid #000">{{ $history->create_date }}</div>
-                                                    <div class="col-sm-4" style="border:1px solid #000">{{ $history->real_amount }}</div>
-                                                    <div class="col-sm-4" style="border:1px solid #000">{{ $history->comment }}</div>
-                                            @endif
-                                        @endforeach
-                                        <p><h4><center><b> Total: </b> {{ $user->amount }} USD</center></h4></p>
-                                    </div>
-                                </div>
-                            </div>
+
                         @endforeach
                     @else
                         <tr>
@@ -79,6 +56,35 @@
             </table>
         </div>
     </div>
+
+
+    <div class="modal fade" id="sample" role="dialog">
+        <div class="modal-dialog">
+        
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"><b id = "user_name"></b></h4>
+                </div>
+                <div class="modal-body">
+                    <table class = "table table-striped table-bordered">
+                        <thead>
+                            <th> Date </th>
+                            <th> Real_amount </th>
+                            <th> Comment </th>
+                        </thead>
+
+                        <tbody id = "modal_tbody"> </tbody>
+                    </table>
+                    <div>
+                        <b>Total: </b>
+                        <label id = "total_amount"></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @stop
 
 @section('javascript') 
@@ -170,5 +176,51 @@
     }
     $('.canvasjs-chart-credit').addClass('hide');
     $('.canvasjs-chart-toolbar').addClass('hide');
+
+    function click_tr(id){
+        var payment_histories = [@foreach($payment_histories as $key => $payment_history)
+            {
+                'user_id': '{{$payment_history->user_id}}',
+                'date': '{{$payment_history->create_date}}',
+                'real_amount': '{{$payment_history->real_amount}}',
+                'comment': '{{$payment_history->comment}}',
+                'confirm_state': '{{$payment_history->state}}',
+            },
+            @endforeach];
+
+        var history = '';
+        for(var i=0;i<payment_histories.length;i++){
+            if(id == payment_histories[i]['user_id'] && Number(payment_histories[i]['confirm_state']) == 1){
+                history += "<tr><td>";
+                history += payment_histories[i]['date'];
+                history += "</td><td>";
+                history += payment_histories[i]['real_amount'];
+                history += "</td><td>";
+                history += payment_histories[i]['comment'];
+                history += "</td></tr>";
+            }
+        }
+
+        var user_amount = '';
+        var user_name = '';
+        var sum_histories = [@foreach($sum_history as $key => $user)
+            {
+                'user_id': '{{$user->id}}',
+                'amount': '{{$user->amount}}',
+                'user_name': '{{$user->name}}',
+            },
+            @endforeach];
+
+        for(var i=0;i<sum_histories.length;i++){
+            if(id == sum_histories[i]['user_id']){
+                user_amount = sum_histories[i]['amount'];
+                user_name = sum_histories[i]['user_name'];
+            }
+        }
+
+        $('#modal_tbody').html(history);
+        $('#total_amount').html(user_amount);
+        $('#user_name').html(user_name);
+    }
 </script>
 @endsection
