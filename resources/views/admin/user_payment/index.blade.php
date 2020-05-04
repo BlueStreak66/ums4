@@ -62,10 +62,12 @@
         <div class="modal-dialog">
         
             <div class="modal-content">
+                
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title"><b id = "user_name"></b></h4>
                 </div>
+                
                 <div class="modal-body">
                     <table class = "table table-striped table-bordered">
                         <thead>
@@ -76,11 +78,15 @@
 
                         <tbody id = "modal_tbody"> </tbody>
                     </table>
-                    <div>
+                </div>
+                
+                <div class="modal-footer">
+                    <h4>
                         <b>Total: </b>
                         <label id = "total_amount"></label>
-                    </div>
+                    </h4>
                 </div>
+
             </div>
         </div>
     </div>
