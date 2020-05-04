@@ -98,37 +98,21 @@
                 </a>
             </li>
             @endcan
-			@can('payment_access')
-            <li class="treeview">
-            <a href="#">
-                <i class="fa fa-share-alt"></i>
-                <span class="title">@lang('global.total_payment.title')</span>
-                <span class="pull-right-container">
-                    <i class="fa fa-angle-left pull-right"></i>
-                </span>
-            </a>
-            <ul class="treeview-menu">
-            @can('payment_access')
-                <li class="">
-                    <a href="{{ route('admin.user_payment.index') }}">
-                        <i class="fa fa-briefcase"></i>
-                        <span class="title">
-                            @lang('global.total_payment.individual')
-                        </span>
-                    </a>
-                </li>
-            @endcan
             @can('payment_access')
             <li class="">
-                <a href="{{ route('admin.payment_history.team') }}">
-                    <i class="fa fa-user"></i>
-                    <span class="title">
-                        @lang('global.total_payment.team')
-                    </span>
+                <a href="{{ route('admin.user_payment.index') }}">
+                    <i class="fa fa-credit-card"></i>
+                    <span class="title">Total Payment ( Individual )</span>
                 </a>
             </li>
             @endcan
-            </ul>
+			
+			@can('payment_access')
+            <li class="">
+                <a href="{{ route('admin.payment_history.team') }}">
+                    <i class="fa fa-credit-card"></i>
+                    <span class="title">Total Payment ( Team )</span>
+                </a>
             </li>
             @endcan
             <li class="{{ $request->segment(1) == 'change_password' ? 'active' : '' }}">
