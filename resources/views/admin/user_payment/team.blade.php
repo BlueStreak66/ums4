@@ -83,8 +83,28 @@
 
     var chart_width = window.innerWidth / 30;
     CanvasJS.addColorSet("team_chart_color", team_chart_color);
+    var date = new Date();
+    var year = date.getYear() + 1900;
+    var month = date.getMonth();
+    var day = date.getDate();
+    if(day < 25) {
+        if(month == 0) {
+            month = 12;
+            year = year - 1;
+        }
+    } 
+    
+    var chart_title = year + "." + month + ".26 ~ ";
+    var year = date.getYear() + 1900;
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+    var current_date = year + "." + month + "." + day;
+    chart_title += current_date;
 
     var team_chart = new CanvasJS.Chart("team_chart", {
+        title:{
+            text: chart_title,
+        },
         dataPointWidth: chart_width,
         colorSet: "team_chart_color",
         exportEnabled: true,
