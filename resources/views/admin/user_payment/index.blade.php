@@ -99,9 +99,11 @@
         else individual_chart_color[i] = "#FF0000";
     }
 
+    var chart_width = window.innerWidth / (i * 2 + 10);
     CanvasJS.addColorSet("individual_chart_color", individual_chart_color);
 
     var individual_chart = new CanvasJS.Chart("individual_chart", {
+        dataPointWidth: chart_width,
         colorSet: "individual_chart_color",
         exportEnabled: true,
         animationEnabled: true,

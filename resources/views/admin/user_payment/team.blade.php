@@ -81,9 +81,11 @@
         else team_chart_color[i] = "#FF0000";
     }
 
+    var chart_width = window.innerWidth / 30;
     CanvasJS.addColorSet("team_chart_color", team_chart_color);
 
     var team_chart = new CanvasJS.Chart("team_chart", {
+        dataPointWidth: chart_width,
         colorSet: "team_chart_color",
         exportEnabled: true,
         animationEnabled: true,
