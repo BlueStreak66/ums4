@@ -12,7 +12,6 @@ class PermissionSeed extends Seeder
     public function run()
     {
         $items = [
-            
             ['id' => 1, 'title' => 'user_management_access',],
             ['id' => 2, 'title' => 'user_management_create',],
             ['id' => 3, 'title' => 'user_management_edit',],
@@ -40,6 +39,14 @@ class PermissionSeed extends Seeder
             ['id' => 25, 'title' => 'team_delete',],
             ['id' => 26, 'title' => 'team_management_access',],
             ['id' => 27, 'title' => 'user_hide',],
+            ['id' => 28, 'title' => 'payment_address_create',],
+            ['id' => 29, 'title' => 'payment_address_edit',],
+            ['id' => 30, 'title' => 'payment_address_view',],
+            ['id' => 31, 'title' => 'payment_address_delete',],
+            ['id' => 32, 'title' => 'payment_address_access',],
+            ['id' => 33, 'title' => 'post_create',],
+            ['id' => 34, 'title' => 'post_edit',],
+            ['id' => 35, 'title' => 'post_delete',],
         ];
 
         foreach ($items as $item) {

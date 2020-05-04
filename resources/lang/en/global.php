@@ -2,10 +2,25 @@
 
 return [
 	
+	'dashboard' => [
+		'title' => 'Dashboard',
+		'payment_addr' => 'Payment Address',
+		'post' => 'Posts',
+	],
+
 	'user-management' => [
 		'title' => 'User Management',
 		'created_at' => 'Time',
 		'fields' => [
+		],
+	],
+	
+	'accounts' => [
+		'title' => 'Bank Accounts',
+		'created_at' => 'Time',
+		'fields' => [
+			'account' => 'Account',
+			'email' => 'Payment Address',
 		],
 	],
 	
