@@ -54,14 +54,17 @@
                                     <h4 class="modal-title"><b>{{ $user->name }}</b></h4>
                                     </div>
                                     <div class="modal-body">
+                                        <div class="col-sm-4" style="border:1px solid #000"><b>Date</b></div>
+                                        <div class="col-sm-4" style="border:1px solid #000"><b>Real_amount(USD)</b></div>
+                                        <div class="col-sm-4" style="border:1px solid #000"><b>Comment</b></div>
                                         @foreach ($payment_histories as $key1 => $history)
-                                            @if( $user->name == $history->user_name)
+                                            @if( $user->name == $history->user_name && $history->state == 1)
                                                     <div class="col-sm-4" style="border:1px solid #000">{{ $history->create_date }}</div>
                                                     <div class="col-sm-4" style="border:1px solid #000">{{ $history->real_amount }}</div>
                                                     <div class="col-sm-4" style="border:1px solid #000">{{ $history->comment }}</div>
                                             @endif
                                         @endforeach
-                                        <div><p><h4><center><b> Total: </b> {{ $user->amount }}</center></h4></p></div>
+                                        <p><h4><center><b> Total: </b> {{ $user->amount }} USD</center></h4></p>
                                     </div>
                                 </div>
                             </div>
