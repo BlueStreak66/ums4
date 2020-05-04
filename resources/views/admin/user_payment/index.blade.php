@@ -8,7 +8,8 @@
         <div class="panel-heading amount_desc">
             Total Amount - {{$real_amount}} USD
         </div>
-
+        <div class="chart-responsive col-sm-12" id="individual_chart">
+        </div>
         <div class="panel-body table-responsive" >
             <table class="table table-bordered table-striped {{ count($sum_history) > 0 ? 'datatable' : '' }}" >
                 <thead>
@@ -77,8 +78,6 @@
                 </tbody>
             </table>
         </div>
-        <div class="chart-responsive col-sm-12" id="individual_chart">
-        </div>
     </div>
 @stop
 
@@ -123,6 +122,7 @@
     var individual_chart = new CanvasJS.Chart("individual_chart", {
         title:{
             text: chart_title,
+            fontSize: 20,
         },
         dataPointWidth: chart_width,
         colorSet: "individual_chart_color",
@@ -132,11 +132,13 @@
             tickLength: 0,
             tickLength: 10,
             tickColor: "write",
+            labelFontSize: 14,
         },
         axisY: {
             tickColor: "#000",
             valueFormatString:"#,##0.# USD",
             maximum: set_max + 500,
+            labelFontSize: 14,
         },
         toolTip: {
             shared: true,
