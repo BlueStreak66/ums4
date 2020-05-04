@@ -106,6 +106,7 @@
     var team_chart = new CanvasJS.Chart("team_chart", {
         title:{
             text: chart_title,
+            fontSize: 20,
         },
         dataPointWidth: chart_width,
         colorSet: "team_chart_color",
@@ -115,11 +116,13 @@
             tickLength: 0,
             tickLength: 10,
             tickColor: "write",
+            labelFontSize: 14,
         },
         axisY: {
             tickColor: "#000",
             valueFormatString:"#,##0.# '%'",
             maximum: set_max + 10,
+            labelFontSize: 14,
         },
         toolTip: {
             shared: true,
